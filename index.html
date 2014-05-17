@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="concherence">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Concherence</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.6/angular.min.js'></script>
+    <script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+    <script src='https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js'></script>
+</head>
+<body>
+
+<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<nav class="navbar navbar-default" role="navigation">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					  <span class="sr-only">Toggle navigation</span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand logo" href="index.html">Concherence</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="index.html">Updates</a></li>
+							<li><a href="concierge.html">Concierge</a></li>
+							<li><a href="schedule.html">Schedule</a></li>
+							<li class="active"><a href="#">Lounge</a></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</nav>
+			</div>
+		</div>
+</div>
+
+<div class="container" ng-controller="loungeController">
+	<!-- Lounge -->
+	<div class="row lounge">
+		<div class="col-lg-10 col-lg-offset-1" id="msgContainer">
+			<div id="messagesDiv">
+		  		<div ng-repeat="msg in messages" class="message">
+		  			<h2 class="loungeName">{{msg.from}}</h2>: <h3 class="loungeMsg">{{msg.body}}</h3>
+	  			</div>
+		    </div>
+
+		    <input type="text" ng-model="name" placeholder="Twitter Handle" class="form-control" id="nameField">
+			<input type="text" ng-model="msg" placeholder="Message" ng-keydown="addMessage($event)" class="form-control">
+		</div>
+	</div>
+	<!-- /Lounge -->
+</div>
+
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- This is where you'll have to make changes to make the lounge work (app.js) -->
+	<script src="js/app.js"></script>
+</body>
+</html>

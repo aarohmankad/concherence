@@ -1,0 +1,35 @@
+/* Create a visible chat viewer */
+#messagesDiv
+{
+	border: 1px black solid;
+	padding-left: 15px;
+	padding-right: 15px;
+	min-height: 600px;
+	max-height: 1000px;
+	overflow-y: scroll;
+}
+
+/* Space out the messages */
+.message
+{
+	margin-top: 20px;
+}
+
+/* Avoid unneccesary line-breaks in the username and message content */
+.loungeName, .loungeMsg
+{
+	display: inline;
+}
+
+/* Make the message content readable */
+.loungeMsg
+{
+	line-height: 1.5em;
+}
+
+/* Improve upon Bootstrap's form-control class. Bigger Text. */
+.form-control
+{
+	font-size: 22px;
+	height: auto;
+}
