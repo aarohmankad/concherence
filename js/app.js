@@ -1,33 +1,49 @@
 
-// mod_name should be changed to the same name you have
-// in the lounge.html file in the ng-app attribute for 
-// the html element
 var app = angular.module("concherence", ["firebase"]);
+var room;
+function roomCreator ($scope, $firebase) {
+	
+	$scope.createRoom = function (e) {
+		if(e.keyCode != 13)
+			return;
 
+		room = $scope.roomname;
+
+		$(".roomMaker").addClass("hidden");
+		$(".conch").removeClass("hidden");
+		$(".messages").removeClass("hidden");
+	}
+
+}
+
+function conchRequester ($scope, $firebase) {
+	var ref = new Firebase("https://concherence.firebaseio.com/");
+	$scope.access = $firebase(ref);
+
+	$scope.requestAccess = function (e) {
+		$scope.access = $firebase(ref.child(room));
+		$scope.access.$add({requestAccess: true});
+	}
+}
 function loungeController($scope, $firebase) 
-{
-	// 1. Sign up for Firebase at firebase.com
-	// 2. Create a Development Firebase
-	// 3. Insert your url into the field
+{	
 	var ref = new Firebase("https://concherence.firebaseio.com/");
 	$scope.messages = $firebase(ref);
 
 	$scope.addMessage = function (e) {
-
-		// Only executes the following code if the user
-		// is pressed the Enter key.
 		if(e.keyCode != 13)
 			return;
 		
-		// Add a message using the user's name and their message
-		$scope.messages.$add({from: $scope.name, body: $scope.msg});
+		$scope.messages = $firebase(ref.child(room));
+		if ($scope.access) {	
+			alert("access was granted");
+			$scope.messages.$add({from: $scope.name, body: $scope.msg});
+		}
 
-		// Clear the message input to improve user experience
+		
 		$scope.msg = "";
-
-		// This code allows the user to only enter their name once.
-		// Users can re-enter/change their names by refreshing the page.
-		document.getElementById('msgContainer').removeChild(document.getElementById('nameField'));
+		
+		$('#nameField').addClass("hidden");
 	};
 
 }
